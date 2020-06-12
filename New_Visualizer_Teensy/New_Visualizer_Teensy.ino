@@ -116,10 +116,10 @@ void loop()
 	musicAnalytics();
 
 	// This is the function that makes it all work. When testing new patterns or functions, comment out normalOperation() and just put it below.
-	//normalOperation();
+	normalOperation();
 
 	// Just display spectrum analyzer (not placed in leds2 or leds3 yet)
-	spectrumAnalyzer(true);
+	//spectrumAnalyzer(true);
 
 	// Just display falling music (not placed in leds2 or leds3 yet)
 	//fallingMusic();

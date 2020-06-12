@@ -9,7 +9,7 @@
 
 // Replace with your network credentials if connecting to a network
 // Replace with whatever credentials you want if creating an Access Point
-const char* ssid = "ESP32";
+const char* ssid = "BLORGAN";
 const char* password = "123456789"; // must be at least 8 characters
 
 // Set LED GPIO
