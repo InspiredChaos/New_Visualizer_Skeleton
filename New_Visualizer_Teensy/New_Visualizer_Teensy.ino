@@ -8,14 +8,18 @@
 #define USE_OCTOWS2811
 #include <OctoWS2811.h>
 #include <FastLED.h>
+#include <Encoder.h>
 // Statistic.h library is used for music analytics
 #include <Statistic.h>
 // For the 2 buttons on the PCB.
 #include <Button.h>
 #define buttonPin1 15
 #define buttonPin2 16
+Encoder enc(39, 38);
 Button button1(buttonPin1);
 Button button2(buttonPin2);
+long current_value; 
+long previous_value = -999;
 
 // "mult" is the multiplier that can be adjusted over WiFi
 double mult = 1.00;
@@ -25,10 +29,10 @@ double mult = 1.00;
 // NUM_LEDS is the total number of LEDs you have on 1 strip, if you're only using 1 LED output (1 LED strip/string)
 // ** If you're using multiple LED outputs, NUM_LEDS is not used when "LEDS.addLeds..." is called in setup() **
 // ** If you're using multiple LED outputs, use NUM_LEDS_PER_STRIP and NUM_STRIPS **
-#define NUM_LEDS 256
-#define NUM_LEDS_PER_STRIP 256
+#define NUM_LEDS 400
+#define NUM_LEDS_PER_STRIP 200
 // NUM_STRIPS controls how many of the OCTOWS2811 output pins will drive LEDs, in this order : 2, 14, 7, 8, 6, 20, 21, 5
-#define NUM_STRIPS 3
+#define NUM_STRIPS 2
 
 // "leds" is the LED data that is actually pushed out to the LEDs
 CRGB leds[NUM_STRIPS * NUM_LEDS_PER_STRIP];
@@ -97,6 +101,14 @@ void loop()
 	// Sets masterBrightness over all of LEDs. Updated through Wifi
 	LEDS.setBrightness(masterBrightness);
 
+	//encoder test code
+  current_value = enc.read();
+
+  if (current_value != previous_value) {
+     Serial.println(current_value); 
+     previous_value = current_value;
+  }
+	
 	// Listen for messages from ESP-32 and do things with them
 	talkToESP();
 
